@@ -1,10 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { ExternalLink } from "lucide-react";
 import { bots } from "@/data/bots";
 import BotModal from "@/components/BotModal";
 import type { Bot } from "@/data/bots";
+
+const TELEGRAM_BOT_URL = "https://t.me/topify_vanillabot";
+
+const SLUG_TO_STAT_KEY: Record<string, string> = {
+  "geo-agent": "geo",
+  "interviewing-bot": "hiring",
+  "vanilla-bot": "vanilla",
+  "story-girl": "storygirl",
+  "fortune-master": "suanming",
+};
 
 const ASCII_LOGO = `
  ██████╗██╗      █████╗ ██╗    ██╗
@@ -18,9 +30,17 @@ const ASCII_LOGO = `
 export default function Home() {
   const [selectedBot, setSelectedBot] = useState<Bot | null>(null);
   const [filter, setFilter] = useState<"all" | "live" | "beta">("all");
+  const [stats, setStats] = useState<Record<string, number>>({ geo: 0, hiring: 0, vanilla: 0, storygirl: 0, suanming: 0 });
+
+  useEffect(() => {
+    fetch("/api/stats")
+      .then((r) => r.json())
+      .then((data) => setStats(data))
+      .catch(() => {});
+  }, []);
 
   const filtered = filter === "all" ? bots : bots.filter((b) => b.status === filter);
-  const totalInstalls = bots.reduce((sum, b) => sum + b.installs, 0);
+  const totalUsers = stats.geo + stats.hiring + stats.vanilla + stats.storygirl + stats.suanming;
 
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
@@ -48,25 +68,53 @@ export default function Home() {
 
       {/* Hero */}
       <section className="border-b border-[#222] px-4 py-16">
-        <div className="mx-auto max-w-5xl">
-          <pre className="overflow-x-auto text-[10px] leading-tight text-[#555] sm:text-xs">
-            {ASCII_LOGO}
-          </pre>
-          <h1 className="mt-6 text-lg text-white sm:text-xl">
-            The AI Bots Directory.
-          </h1>
-          <p className="mt-2 max-w-xl text-sm text-[#888]">
-            AI bots you can try right now on Telegram. Built by{" "}
+        <div className="mx-auto flex max-w-5xl flex-col gap-12 md:flex-row md:items-center md:justify-between">
+          {/* Left — text */}
+          <div className="flex-1">
+            <pre className="overflow-x-auto text-[10px] leading-tight text-[#555] sm:text-xs">
+              {ASCII_LOGO}
+            </pre>
+            <h1 className="mt-6 text-lg text-white sm:text-xl">
+              Enterprise AI Bots That Solve Real Problems.
+            </h1>
+            <p className="mt-2 max-w-xl text-sm text-[#888]">
+              Each user gets their own isolated OpenClaw AI agent through a single
+              Telegram interface — powered by our routing and EC2 pool management
+              system. No setup, no infrastructure. Just open Telegram and start. Built by{" "}
+              <a
+                href="https://topify.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white underline decoration-[#333] underline-offset-4 hover:decoration-white"
+              >
+                Topify.ai
+              </a>
+              .
+            </p>
+          </div>
+
+          {/* Right — QR code */}
+          <div className="flex flex-col items-center gap-4">
+            <div className="overflow-hidden rounded-2xl">
+              <Image
+                src="/images/vanilla_bot_qr.jpg"
+                alt="Vanilla Bot Telegram QR Code"
+                width={300}
+                height={300}
+                className="h-auto w-[300px]"
+                priority
+              />
+            </div>
+            <p className="text-xs text-[#555]">Scan to start chatting on Telegram</p>
             <a
-              href="https://topify.ai"
+              href={TELEGRAM_BOT_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white underline decoration-[#333] underline-offset-4 hover:decoration-white"
+              className="flex items-center gap-2 text-xs text-[#888] transition hover:text-white"
             >
-              Topify.ai
+              Open in Telegram <ExternalLink size={12} />
             </a>
-            . Click any bot to get its QR code and link.
-          </p>
+          </div>
         </div>
       </section>
 
@@ -83,7 +131,7 @@ export default function Home() {
                   : "text-[#888] hover:text-white"
               }`}
             >
-              All ({totalInstalls.toLocaleString()})
+              All ({totalUsers.toLocaleString()})
             </button>
             <button
               onClick={() => setFilter("live")}
@@ -148,7 +196,7 @@ export default function Home() {
                       />
                     </td>
                     <td className="py-4 text-right text-sm text-[#888]">
-                      {bot.installs.toLocaleString()}
+                      {(stats[SLUG_TO_STAT_KEY[bot.slug]] || 0).toLocaleString()}
                     </td>
                   </tr>
                 ))}
@@ -170,14 +218,19 @@ export default function Home() {
           <span className="text-xs text-[#555]">
             &copy; {new Date().getFullYear()} GetYourClaw.ai
           </span>
-          <a
-            href="https://topify.ai"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs text-[#555] hover:text-white"
-          >
-            Built by Topify.ai
-          </a>
+          <div className="flex items-center gap-4">
+            <Link href="/privacy" className="text-xs text-[#555] hover:text-white">
+              Privacy
+            </Link>
+            <a
+              href="https://topify.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-[#555] hover:text-white"
+            >
+              Built by Topify.ai
+            </a>
+          </div>
         </div>
       </footer>
 

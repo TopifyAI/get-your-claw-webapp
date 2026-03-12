@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
+import Image from "next/image";
 import { X, ExternalLink } from "lucide-react";
-import { QRCodeSVG } from "qrcode.react";
 import type { Bot } from "@/data/bots";
 
 interface BotModalProps {
@@ -51,13 +51,13 @@ export default function BotModal({ bot, onClose }: BotModalProps) {
 
         {/* QR Code */}
         <div className="mb-8 flex justify-center">
-          <div className="rounded-lg bg-white p-4">
-            <QRCodeSVG
-              value={bot.telegramUrl}
-              size={180}
-              level="M"
-              bgColor="#ffffff"
-              fgColor="#000000"
+          <div className="overflow-hidden rounded-2xl">
+            <Image
+              src={bot.qrImage}
+              alt={`${bot.name} Telegram QR Code`}
+              width={280}
+              height={280}
+              className="h-auto w-[280px]"
             />
           </div>
         </div>

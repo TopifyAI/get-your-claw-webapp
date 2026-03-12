@@ -26,7 +26,7 @@ export default function AboutPage() {
 
         <div className="space-y-6 text-sm leading-relaxed text-[#888]">
           <p>
-            <span className="text-white">GetYourClaw.ai</span> is a directory of AI bots built by{" "}
+            <span className="text-white">GetYourClaw.ai</span> is a directory of enterprise AI bots built by{" "}
             <a
               href="https://topify.ai"
               target="_blank"
@@ -39,29 +39,49 @@ export default function AboutPage() {
           </p>
 
           <p>
-            We build practical AI tools that solve real problems — from GEO
-            (Generative Engine Optimization) monitoring to interview prep to everyday
-            AI assistance. All our bots are available on Telegram.
+            We give every user their own isolated OpenClaw AI agent through a
+            single Telegram interface. Our routing and EC2 pool management system
+            handles all the infrastructure — no setup, no servers, no hassle.
+            Just open Telegram and start talking to your dedicated agent.
+          </p>
+
+          <p>
+            We build AI bots that solve real problems inside companies — hiring,
+            marketing, growth, and day-to-day operations.
           </p>
 
           <div className="border border-[#222] p-6">
-            <p className="mb-4 text-xs text-[#555]">// what we do</p>
+            <p className="mb-4 text-xs text-[#555]">// how it works</p>
             <ul className="space-y-2 text-xs">
               <li className="text-[#888]">
-                <span className="text-[#555]">1.</span> Build AI bots that work out of the box
+                <span className="text-[#555]">1.</span> Each user gets an isolated OpenClaw agent — no shared state, no cross-talk
               </li>
               <li className="text-[#888]">
-                <span className="text-[#555]">2.</span> Focus on GEO — how brands appear in AI responses
+                <span className="text-[#555]">2.</span> Our EC2 pool routing system auto-provisions and manages agents at scale
               </li>
               <li className="text-[#888]">
-                <span className="text-[#555]">3.</span> Ship fast, iterate based on real usage
+                <span className="text-[#555]">3.</span> One Telegram interface for everything — marketing, hiring, growth
+              </li>
+              <li className="text-[#888]">
+                <span className="text-[#555]">4.</span> Growth — automate the work across every department
               </li>
             </ul>
           </div>
 
           <p>
-            Scan a QR code or tap a link to start using any of our bots. No sign-up
-            walls, no friction.
+            Scan a QR code or tap a link to start using any bot. No sign-up
+            walls, no contracts, no friction.
+          </p>
+
+          <p>
+            Questions? Reach us at{" "}
+            <a
+              href="mailto:support@topify.ai"
+              className="text-white underline decoration-[#333] underline-offset-4 hover:decoration-white"
+            >
+              support@topify.ai
+            </a>
+            .
           </p>
         </div>
 
