@@ -1,96 +1,190 @@
-import HeroSection from "@/components/HeroSection";
-import BotCard from "@/components/BotCard";
-import { bots } from "@/data/bots";
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Scan, Zap, Shield } from "lucide-react";
+import { bots } from "@/data/bots";
+import BotModal from "@/components/BotModal";
+import type { Bot } from "@/data/bots";
+
+const ASCII_LOGO = `
+ ██████╗██╗      █████╗ ██╗    ██╗
+██╔════╝██║     ██╔══██╗██║    ██║
+██║     ██║     ███████║██║ █╗ ██║
+██║     ██║     ██╔══██║██║███╗██║
+╚██████╗███████╗██║  ██║╚███╔███╔╝
+ ╚═════╝╚══════╝╚═╝  ╚═╝ ╚══╝╚══╝
+`;
 
 export default function Home() {
+  const [selectedBot, setSelectedBot] = useState<Bot | null>(null);
+  const [filter, setFilter] = useState<"all" | "live" | "beta">("all");
+
+  const filtered = filter === "all" ? bots : bots.filter((b) => b.status === filter);
+  const totalInstalls = bots.reduce((sum, b) => sum + b.installs, 0);
+
   return (
-    <>
-      <HeroSection />
-
-      {/* Featured Bots */}
-      <section className="px-4 py-20 sm:px-6">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-10 flex items-end justify-between">
-            <div>
-              <h2 className="text-3xl font-bold text-white">Featured Agents</h2>
-              <p className="mt-2 text-gray-400">Our most popular AI bots</p>
-            </div>
-            <Link
-              href="/bots"
-              className="hidden items-center gap-1 text-sm text-purple-400 hover:text-purple-300 sm:flex"
-            >
-              View all <ArrowRight size={14} />
+    <div className="min-h-screen bg-[#0a0a0a]">
+      {/* Header */}
+      <header className="border-b border-[#222]">
+        <div className="mx-auto flex h-12 max-w-5xl items-center justify-between px-4">
+          <div className="flex items-center gap-3">
+            <span className="text-sm font-bold text-white">GetYourClaw</span>
+          </div>
+          <nav className="flex items-center gap-6">
+            <Link href="/about" className="text-xs text-[#888] transition hover:text-white">
+              /about
             </Link>
-          </div>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {bots.slice(0, 3).map((bot) => (
-              <BotCard key={bot.slug} bot={bot} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How it works */}
-      <section className="border-y border-white/10 bg-white/[0.02] px-4 py-20 sm:px-6">
-        <div className="mx-auto max-w-7xl">
-          <h2 className="mb-12 text-center text-3xl font-bold text-white">How It Works</h2>
-          <div className="grid gap-8 md:grid-cols-3">
-            <div className="text-center">
-              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-purple-500/20">
-                <Scan className="h-7 w-7 text-purple-400" />
-              </div>
-              <h3 className="mb-2 text-lg font-semibold text-white">1. Browse</h3>
-              <p className="text-sm text-gray-400">
-                Explore our collection of AI agents built for different use cases — from GEO
-                monitoring to content generation.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-cyan-500/20">
-                <Zap className="h-7 w-7 text-cyan-400" />
-              </div>
-              <h3 className="mb-2 text-lg font-semibold text-white">2. Try</h3>
-              <p className="text-sm text-gray-400">
-                Scan the QR code or click to try any bot instantly. No setup required — just start
-                using it.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-pink-500/20">
-                <Shield className="h-7 w-7 text-pink-400" />
-              </div>
-              <h3 className="mb-2 text-lg font-semibold text-white">3. Deploy</h3>
-              <p className="text-sm text-gray-400">
-                Ready to go big? Deploy bots into your workflow with full API access and custom
-                configurations.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* All Bots */}
-      <section className="px-4 py-20 sm:px-6">
-        <div className="mx-auto max-w-7xl">
-          <h2 className="mb-10 text-center text-3xl font-bold text-white">All Agents</h2>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {bots.map((bot) => (
-              <BotCard key={bot.slug} bot={bot} />
-            ))}
-          </div>
-          <div className="mt-10 text-center">
-            <Link
-              href="/bots"
-              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 to-cyan-600 px-6 py-3 font-semibold text-white transition hover:opacity-90"
+            <a
+              href="https://topify.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-[#888] transition hover:text-white"
             >
-              Explore All Bots <ArrowRight size={18} />
-            </Link>
-          </div>
+              /topify.ai
+            </a>
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section className="border-b border-[#222] px-4 py-16">
+        <div className="mx-auto max-w-5xl">
+          <pre className="overflow-x-auto text-[10px] leading-tight text-[#555] sm:text-xs">
+            {ASCII_LOGO}
+          </pre>
+          <h1 className="mt-6 text-lg text-white sm:text-xl">
+            The AI Bots Directory.
+          </h1>
+          <p className="mt-2 max-w-xl text-sm text-[#888]">
+            AI bots you can try right now on Telegram. Built by{" "}
+            <a
+              href="https://topify.ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white underline decoration-[#333] underline-offset-4 hover:decoration-white"
+            >
+              Topify.ai
+            </a>
+            . Click any bot to get its QR code and link.
+          </p>
         </div>
       </section>
-    </>
+
+      {/* Leaderboard */}
+      <section className="px-4 py-10">
+        <div className="mx-auto max-w-5xl">
+          {/* Filter tabs */}
+          <div className="mb-6 flex items-center gap-1 border-b border-[#222]">
+            <button
+              onClick={() => setFilter("all")}
+              className={`px-4 py-2 text-xs transition ${
+                filter === "all"
+                  ? "border-b border-white text-white"
+                  : "text-[#888] hover:text-white"
+              }`}
+            >
+              All ({totalInstalls.toLocaleString()})
+            </button>
+            <button
+              onClick={() => setFilter("live")}
+              className={`px-4 py-2 text-xs transition ${
+                filter === "live"
+                  ? "border-b border-white text-white"
+                  : "text-[#888] hover:text-white"
+              }`}
+            >
+              Live
+            </button>
+            <button
+              onClick={() => setFilter("beta")}
+              className={`px-4 py-2 text-xs transition ${
+                filter === "beta"
+                  ? "border-b border-white text-white"
+                  : "text-[#888] hover:text-white"
+              }`}
+            >
+              Beta
+            </button>
+          </div>
+
+          {/* Table */}
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-[#222] text-left text-xs text-[#555]">
+                  <th className="w-12 pb-3 font-normal">#</th>
+                  <th className="pb-3 font-normal">Bot</th>
+                  <th className="pb-3 font-normal">Category</th>
+                  <th className="pb-3 text-right font-normal">Status</th>
+                  <th className="pb-3 text-right font-normal">Users</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filtered.map((bot) => (
+                  <tr
+                    key={bot.slug}
+                    onClick={() => setSelectedBot(bot)}
+                    className="group cursor-pointer border-b border-[#161616] transition hover:bg-[#111]"
+                  >
+                    <td className="py-4 text-sm text-[#555]">{bot.rank}</td>
+                    <td className="py-4">
+                      <div>
+                        <span className="text-sm text-white group-hover:underline">
+                          {bot.name}
+                        </span>
+                        <p className="mt-0.5 text-xs text-[#666]">{bot.tagline}</p>
+                      </div>
+                    </td>
+                    <td className="py-4">
+                      <span className="rounded border border-[#222] bg-[#161616] px-2 py-0.5 text-[10px] text-[#888]">
+                        {bot.category}
+                      </span>
+                    </td>
+                    <td className="py-4 text-right">
+                      <span
+                        className={`inline-block h-2 w-2 rounded-full ${
+                          bot.status === "live" ? "bg-green-500" : "bg-yellow-500"
+                        }`}
+                      />
+                    </td>
+                    <td className="py-4 text-right text-sm text-[#888]">
+                      {bot.installs.toLocaleString()}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {filtered.length === 0 && (
+            <div className="py-12 text-center text-sm text-[#555]">
+              No bots match this filter.
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-[#222] px-4 py-8">
+        <div className="mx-auto flex max-w-5xl items-center justify-between">
+          <span className="text-xs text-[#555]">
+            &copy; {new Date().getFullYear()} GetYourClaw.ai
+          </span>
+          <a
+            href="https://topify.ai"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-[#555] hover:text-white"
+          >
+            Built by Topify.ai
+          </a>
+        </div>
+      </footer>
+
+      {/* Modal */}
+      {selectedBot && (
+        <BotModal bot={selectedBot} onClose={() => setSelectedBot(null)} />
+      )}
+    </div>
   );
 }

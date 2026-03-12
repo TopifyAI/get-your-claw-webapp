@@ -1,19 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
-const inter = Inter({
-  variable: "--font-sans",
+const mono = JetBrains_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "GetYourClaw.ai — AI Agents That Work For You",
+  title: "GetYourClaw.ai — AI Bots Directory",
   description:
-    "Browse, try, and deploy powerful AI bots for GEO monitoring, content generation, workflow automation, and more. Built by Topify.ai.",
-  keywords: ["AI agents", "bots", "GEO", "automation", "Topify"],
+    "Browse and try AI bots built by Topify.ai. Scan a QR code or tap a link to start using them on Telegram.",
+  keywords: ["AI bots", "Telegram bots", "GEO", "automation", "Topify"],
 };
 
 export default function RootLayout({
@@ -23,11 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} antialiased`}>
-        <Navbar />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
-      </body>
+      <body className={`${mono.variable} font-mono antialiased`}>{children}</body>
     </html>
   );
 }

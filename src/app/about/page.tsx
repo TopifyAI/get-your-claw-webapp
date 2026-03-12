@@ -8,72 +8,88 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="px-4 pb-20 pt-28 sm:px-6">
-      <div className="mx-auto max-w-3xl">
-        <h1 className="mb-6 text-4xl font-bold text-white">About GetYourClaw</h1>
+    <div className="min-h-screen bg-[#0a0a0a]">
+      {/* Header */}
+      <header className="border-b border-[#222]">
+        <div className="mx-auto flex h-12 max-w-5xl items-center justify-between px-4">
+          <Link href="/" className="text-sm font-bold text-white">
+            GetYourClaw
+          </Link>
+          <Link href="/" className="text-xs text-[#888] hover:text-white">
+            /home
+          </Link>
+        </div>
+      </header>
 
-        <div className="space-y-6 text-gray-300 leading-relaxed">
+      <main className="mx-auto max-w-2xl px-4 py-16">
+        <h1 className="mb-8 text-lg text-white">About</h1>
+
+        <div className="space-y-6 text-sm leading-relaxed text-[#888]">
           <p>
-            <strong className="text-white">GetYourClaw.ai</strong> is a curated marketplace of AI
-            agents and bots built by{" "}
+            <span className="text-white">GetYourClaw.ai</span> is a directory of AI bots built by{" "}
             <a
               href="https://topify.ai"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-purple-400 hover:text-purple-300"
+              className="text-white underline decoration-[#333] underline-offset-4 hover:decoration-white"
             >
               Topify.ai
             </a>
-            . We build practical, production-ready AI tools that solve real business problems.
+            .
           </p>
 
           <p>
-            Our focus is on <strong className="text-white">Generative Engine Optimization (GEO)</strong>{" "}
-            — helping businesses understand and optimize how they appear in AI-generated responses
-            across platforms like ChatGPT, Perplexity, Gemini, and Claude.
+            We build practical AI tools that solve real problems — from GEO
+            (Generative Engine Optimization) monitoring to interview prep to everyday
+            AI assistance. All our bots are available on Telegram.
           </p>
 
-          <div className="rounded-xl border border-white/10 bg-white/5 p-6">
-            <h2 className="mb-4 text-xl font-semibold text-white">What We Believe</h2>
-            <ul className="space-y-3 text-sm">
-              <li className="flex gap-3">
-                <span className="text-purple-400">&#x2022;</span>
-                AI agents should be accessible, not locked behind enterprise contracts
+          <div className="border border-[#222] p-6">
+            <p className="mb-4 text-xs text-[#555]">// what we do</p>
+            <ul className="space-y-2 text-xs">
+              <li className="text-[#888]">
+                <span className="text-[#555]">1.</span> Build AI bots that work out of the box
               </li>
-              <li className="flex gap-3">
-                <span className="text-purple-400">&#x2022;</span>
-                Every business needs to understand their AI visibility
+              <li className="text-[#888]">
+                <span className="text-[#555]">2.</span> Focus on GEO — how brands appear in AI responses
               </li>
-              <li className="flex gap-3">
-                <span className="text-purple-400">&#x2022;</span>
-                The best tools are built by people who use them daily
-              </li>
-              <li className="flex gap-3">
-                <span className="text-purple-400">&#x2022;</span>
-                Automation should augment human work, not replace it
+              <li className="text-[#888]">
+                <span className="text-[#555]">3.</span> Ship fast, iterate based on real usage
               </li>
             </ul>
           </div>
 
-          <div className="rounded-xl border border-purple-500/30 bg-gradient-to-r from-purple-500/10 to-cyan-500/10 p-6">
-            <h2 className="mb-3 text-xl font-semibold text-white">Built by Topify.ai</h2>
-            <p className="text-sm">
-              Topify.ai is a GEO platform that helps brands monitor and optimize their visibility
-              in AI-generated search results. GetYourClaw.ai is where we share the bots and agents
-              we&apos;ve built along the way.
-            </p>
-          </div>
-
-          <div className="pt-4 text-center">
-            <Link
-              href="/bots"
-              className="inline-flex rounded-xl bg-gradient-to-r from-purple-600 to-cyan-600 px-8 py-3 font-semibold text-white transition hover:opacity-90"
-            >
-              Browse Our Bots
-            </Link>
-          </div>
+          <p>
+            Scan a QR code or tap a link to start using any of our bots. No sign-up
+            walls, no friction.
+          </p>
         </div>
-      </div>
+
+        <div className="mt-12">
+          <Link
+            href="/"
+            className="text-xs text-[#555] hover:text-white"
+          >
+            &larr; back to directory
+          </Link>
+        </div>
+      </main>
+
+      <footer className="border-t border-[#222] px-4 py-8">
+        <div className="mx-auto flex max-w-5xl items-center justify-between">
+          <span className="text-xs text-[#555]">
+            &copy; {new Date().getFullYear()} GetYourClaw.ai
+          </span>
+          <a
+            href="https://topify.ai"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-[#555] hover:text-white"
+          >
+            Built by Topify.ai
+          </a>
+        </div>
+      </footer>
     </div>
   );
 }
