@@ -59,8 +59,8 @@ export const bots: Bot[] = [
     tagline: "Lifestyle — ancient Chinese fortune telling, one conversation away",
     description:
       "An AI fortune telling master rooted in Chinese metaphysics. Send your birth date for a BaZi reading, upload a palm photo, ask about feng shui, or consult the I Ching. He shows his work — real charts, real pillars, real hexagrams. Chinese & English.",
-    telegramUrl: "https://t.me/topify_suanmingbot",
-    telegramHandle: "@topify_suanmingbot",
+    telegramUrl: "https://t.me/topify_suan_ming_bot",
+    telegramHandle: "@topify_suan_ming_bot",
     qrImage: "/images/suanming_bot_qr.jpg",
     rank: 5,
     status: "beta",
