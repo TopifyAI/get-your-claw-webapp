@@ -56,7 +56,7 @@ export const bots: Bot[] = [
   },
   {
     slug: "story-girl",
-    name: "Story Girl (experimental)",
+    name: "Story Girl",
     tagline: "Entertainment — she's lived a lot, and she tells you everything",
     description:
       "She's not an assistant — she's a character with a past full of wild nights, heated encounters, and stories she's been dying to share. Every conversation is a first-person confession — vivid, sensory, unapologetic. She sets the mood, you just listen. Age-verified 18+ only. Speaks any language.",
@@ -64,7 +64,7 @@ export const bots: Bot[] = [
     telegramHandle: "@topify_nsfwbot",
     qrImage: "/images/storygirl_bot_qr.jpg",
     rank: 4,
-    status: "beta",
+    status: "coming-soon",
     category: "Entertainment",
   },
   {
