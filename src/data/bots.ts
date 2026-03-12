@@ -53,21 +53,7 @@ export const bots: Bot[] = [
     rank: 3,
     status: "live",
     category: "Growth",
-  },
-  {
-    slug: "story-girl",
-    name: "Story Girl",
-    tagline: "Entertainment — she's lived a lot, and she tells you everything",
-    description:
-      "She's not an assistant — she's a character with a past full of wild nights, heated encounters, and stories she's been dying to share. Every conversation is a first-person confession — vivid, sensory, unapologetic. She sets the mood, you just listen. Age-verified 18+ only. Speaks any language.",
-    telegramUrl: "https://t.me/topify_nsfwbot",
-    telegramHandle: "@topify_nsfwbot",
-    qrImage: "/images/storygirl_bot_qr.jpg",
-    rank: 4,
-    status: "coming-soon",
-    category: "Entertainment",
-  },
-  {
+  },{
     slug: "fortune-master",
     name: "算命大师 · Fortune Master (experimental)",
     tagline: "Lifestyle — ancient Chinese fortune telling, one conversation away",
