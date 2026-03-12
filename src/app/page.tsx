@@ -40,7 +40,7 @@ export default function Home() {
   }, []);
 
   const filtered = filter === "all" ? bots : bots.filter((b) => b.status === filter);
-  const totalUsers = stats.geo + stats.hiring + stats.vanilla + stats.storygirl + stats.suanming;
+  const totalUsers = (stats.geo || 0) + (stats.hiring || 0) + (stats.vanilla || 0) + (stats.storygirl || 0) + (stats.suanming || 0);
 
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
