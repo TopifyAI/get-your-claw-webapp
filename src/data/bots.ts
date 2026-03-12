@@ -56,7 +56,7 @@ export const bots: Bot[] = [
   },
   {
     slug: "story-girl",
-    name: "Story Girl",
+    name: "Story Girl (experimental)",
     tagline: "Entertainment — she's lived a lot, and she tells you everything",
     description:
       "She's not an assistant — she's a character with a past full of wild nights, heated encounters, and stories she's been dying to share. Every conversation is a first-person confession — vivid, sensory, unapologetic. She sets the mood, you just listen. Age-verified 18+ only. Speaks any language.",
@@ -69,7 +69,7 @@ export const bots: Bot[] = [
   },
   {
     slug: "fortune-master",
-    name: "算命大师 · Fortune Master",
+    name: "算命大师 · Fortune Master (experimental)",
     tagline: "Lifestyle — ancient Chinese fortune telling, one conversation away",
     description:
       "An AI fortune telling master rooted in Chinese metaphysics. Send your birth date for a BaZi reading, upload a palm photo, ask about feng shui, or consult the I Ching. He shows his work — real charts, real pillars, real hexagrams. Chinese & English.",
