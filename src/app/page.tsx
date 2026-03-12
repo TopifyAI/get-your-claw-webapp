@@ -33,7 +33,7 @@ export default function Home() {
   const [stats, setStats] = useState<Record<string, number>>({ geo: 0, hiring: 0, vanilla: 0, storygirl: 0, suanming: 0 });
 
   useEffect(() => {
-    fetch("http://13.57.134.240:9090/stats")
+    fetch("/api/stats")
       .then((r) => r.json())
       .then((data) => setStats(data))
       .catch(() => {});
